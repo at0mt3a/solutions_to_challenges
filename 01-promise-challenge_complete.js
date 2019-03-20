@@ -20,31 +20,15 @@ function callBackend(userId) {
 
 function main () {
   let userIds = [1, 2]
-  let userPromises = []
-
-  for(let i = 0; i < userIds.length; i++){
-    userPromises.push(callBackend(userIds[i]))
-
-  }
-
-  userPromises[0].then (function (data) {
-    users = data
-    console.log("User 1", users)
-  })
-    .catch (function(data){
-      console.log(data, 'error')
-    })
+  let results = callBackend(userIds)
   
-  userPromises[1].then (function (data) {
-    users = data
-    console.log("User 2", users)
-  })
-    .catch (function(data){
-      console.log(data, 'error')
+  results
+    .then (function (data) {
+        console.log ("users", data)
     })
- 
-  
-  }
-
+    .catch (function (error) {
+        console.log('ohnoes', error.msg)
+    })
+}
 
 main()
