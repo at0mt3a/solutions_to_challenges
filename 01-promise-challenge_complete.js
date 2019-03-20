@@ -1,16 +1,18 @@
-function callBackend(userId) {
+function callBackend(userIds) {
 
   let users = [
     { id: 1, name: 'John', salary: 93000 },
     { id: 2, name: 'Sarah', salary: 122000 },
+    { id: 3, name: 'bae', salary: 1000000 },
+    { id: 4, name: 'm3tb0t', salary: 1234560 }
   ]
 
-  let user = users.filter(function (u) { return (u.id === userId)})
+  let filteredUsers = users.filter(u => userIds.indexOf(u.id) > -1 )
 
   return new Promise (function(resolve, reject) {
     setTimeout(() => {
-      if (user.length > 0) {
-        resolve(user[0])
+      if (filteredUsers.length > 0) {
+        resolve(filteredUsers)
       } else {
         reject({msg: 'phail'})
       }
@@ -19,7 +21,7 @@ function callBackend(userId) {
 }
 
 function main () {
-  let userIds = [1, 2]
+  let userIds = [3, 4]
   let results = callBackend(userIds)
   
   results
